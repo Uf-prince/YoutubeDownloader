@@ -16,13 +16,13 @@ async function Download(url, res) {
             
             console.error('Download failed:', result);
             
-            return res.status(500).json({ 
+            return res.status(500).json({
                 
-                status: 'error', 
+                status: 'error',
                 
-                error: 'Failed to get download link', 
+                error: 'Failed to get download link',
                 
-                detail: result 
+                detail: result
                     
             });
             
@@ -32,9 +32,9 @@ async function Download(url, res) {
         
         console.log(`Returning link: ${result.filePath}`);
         
-        // Return JSON with the URL instead of redirecting
+
         
-        // This makes it easier for the bot to handle
+        // Return JSON with the URL
         
         res.json({
             
@@ -42,21 +42,27 @@ async function Download(url, res) {
             
             url: result.filePath,
             
-            title: result.title || 'video'
+            title: result.title || 'video',
+            
+            thumbnail: result.thumbnail || '',
+            
+            quality: result.quality || '360p'
                 
         });
+        
+
         
     } catch (err) {
         
         console.error('API Error:', err);
         
-        res.status(500).json({ 
+        res.status(500).json({
             
-            status: 'error', 
+            status: 'error',
             
-            error: 'Internal server error', 
+            error: 'Internal server error',
             
-            message: err.message 
+            message: err.message
                 
         });
         
@@ -83,6 +89,11 @@ async function DownloadPlaylist(playlistId, res) {
 
 
 module.exports = { Download, GetPlaylist, DownloadPlaylist };
+
+
+
+
+
 
 
 
