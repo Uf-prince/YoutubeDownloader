@@ -6,9 +6,15 @@ async function Download(url, res) {
     
     try {
         
-        console.log(`Processing download for: ${url}`);
+        // Support both query params and body for flexibility
         
-        const result = await downloadYouTube(url);
+        const type = res.req.body.type || res.req.query.type || 'video';
+        
+        console.log(`Processing ${type} download for: ${url}`);
+        
+
+        
+        const result = await downloadYouTube(url, type);
         
 
         
@@ -30,11 +36,9 @@ async function Download(url, res) {
         
 
         
-        console.log(`Returning link: ${result.filePath}`);
+        console.log(`Returning ${type} link: ${result.filePath}`);
         
 
-        
-        // Return JSON with the URL
         
         res.json({
             
@@ -46,7 +50,9 @@ async function Download(url, res) {
             
             thumbnail: result.thumbnail || '',
             
-            quality: result.quality || '360p'
+            quality: type === 'audio' ? '128kbps' : (result.quality || '360p'),
+            
+            type: type
                 
         });
         
@@ -89,6 +95,9 @@ async function DownloadPlaylist(playlistId, res) {
 
 
 module.exports = { Download, GetPlaylist, DownloadPlaylist };
+
+
+
 
 
 
