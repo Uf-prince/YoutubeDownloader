@@ -4,9 +4,9 @@
   
   "version": "1.0.0",
   
-  "description": "",
+  "description": "YouTube Downloader API for BILAL Bot",
   
-  "main": "index.js",
+  "main": "webapp.js",
   
   "scripts": {
     
@@ -14,24 +14,17 @@
     
   },
   
-  "author": "",
-  
-  "license": "ISC",
-  
   "dependencies": {
     
-    "archiver": "^5.3.1",
+    "express": "^4.18.2",
     
     "body-parser": "^1.20.2",
     
-    "express": "^4.18.1",
-    
-    "youtubei.js": "latest"
+    "@hiudyy/ytdl": "^0.2.6"
     
   }
   
 }
-
 
 
 
